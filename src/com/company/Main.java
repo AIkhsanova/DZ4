@@ -3,10 +3,13 @@ package com.company;
 public class Main {
 
     public static void main(String[] args) {
-        String[] Books;
-        Books = new String[]{"Война и Мир", "Преступление и наказание"};
+
+
+        Book[] Books = new Book[]{new Book("Война и мир", "Толстой"),
+                new Book("Преступление и наказание", "Достоевский", 1, 600),
+                new Book("Журнал Мурзилка", 12, 30)};
         Reader reader = new Reader();
-        Book book = new Book(reader.choiceBook(Books), 20);
+        Book book = reader.choiceBook(Books);
         reader.readBook(book);
         System.out.println(reader.getRate(book));
 
@@ -42,27 +45,27 @@ class Book {
         this.pagesNumber = pagesNumber;
     }
 
-    Book(String name, int serialNumber,int pagesNumber) {
+    Book(String name, int serialNumber, int pagesNumber) {
         this.name = name;
-        this.serialNumber=serialNumber;
+        this.serialNumber = serialNumber;
         this.pagesNumber = pagesNumber;
     }
 
     @Override
     public String toString() {
         return "Book{" +
-                "name='" + name + '\'' +
-                ", author='" + author + '\'' +
-                ", serialNumber=" + serialNumber +
-                ", pagesNumber=" + pagesNumber +
+                "Название книги='" + name + '\'' +
+                ", автор='" + author + '\'' +
+                ", Порядковый номер в серии=" + serialNumber +
+                ", Количество страниц=" + pagesNumber +
                 '}';
     }
 }
 
 class Reader {
-    String choiceBook(String[] Books) {
+    Book choiceBook(Book[] Books) {
         final java.util.Random random = new java.util.Random();
-        String book = Books[random.nextInt(Books.length)];
+        Book book = Books[random.nextInt(Books.length)];
         return book;
     }
 
